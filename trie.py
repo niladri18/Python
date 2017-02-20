@@ -28,22 +28,15 @@ class Node:
 		current.label = True
 	
 	def add(self,word):
-		#print(word)
 		n = len(word)
-		#print(n)
 		i = 0
 		current = self
 		while i < n:
-			#print('',current.data,word[i])
 			if word[i] not in current.data:
-				#print('*',current.data,word[i])
 				current.data.append(word[i])
 				current.child[word[i]] = Node()
-				#numchild = len(current.child[current.data])
 				current = current.child[word[i]]
 			else:
-				#print('',word[i],current.data)
-				
 				current = current.child[word[i]]
 			i += 1
 		current.label = True	
@@ -65,9 +58,6 @@ class Node:
 				
 	def countnode(self,num):
 		if self.label:
-			#nbr += num
-			#print(num)
-			#return
 			yield(num) 
 			for node in self.child.values():
 				if not node.isEmpty():
@@ -76,13 +66,10 @@ class Node:
 					num -= 1
 		if not self.label:
 			for node in self.child.values():
-				#print(node.data)
 				if not node.isEmpty():
-					#print(node.data)
 					num += 1
 					yield from node.countnode(num)
-					num -= 1
-			#return num			
+					num -= 1			
 					
 		
 	def printnode(self,xp):
@@ -94,10 +81,8 @@ class Node:
 					xp.append(i)
 					yield from node.printnode(xp)
 					xp.pop()
-			#xp.pop()
 		else:
 			for i,node in self.child.items():
-				#print('hi',i,node.data)
 				if not node.isEmpty():
 					xp.append(i)
 					yield from node.printnode(xp)
